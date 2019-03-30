@@ -1,0 +1,36 @@
+{
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+    },
+    "tabBar": {
+        "color": "#999",
+        "selectedColor": "#2cbf64",
+        "backgroundColor": "#fff",
+        "position": "bottom",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/friend",
+                "text": "广场",
+                "iconPath": "static/tabber/发表未选中.png",
+                "selectedIconPath": "static/tabber/首页选中.png"
+            },
+            {
+                "pagePath": "pages/user",
+                "text": "自己",
+                "iconPath": "static/tabber/我的未选中.png",
+                "selectedIconPath": "static/tabber/我的选中.png"
+            }
+        ]
+    },
+    
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "远邻",
+        "navigationBarTextStyle": "black"
+    },
+    "cloud": true
+}

@@ -1,0 +1,87 @@
+{
+	"cloudfunctionRoot": "static/functions/",
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"miniprogramRoot": "dist/",
+	"compileType": "miniprogram",
+	"appid": "wx42c0ae272d2935e0",
+	"projectname": "YuanLin",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 7,
+			"list": [
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "packageA/order-details",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "搜索",
+					"pathName": "packageA/seek",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "icon测试",
+					"pathName": "packageA/iconcs",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/member",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关于我们",
+					"pathName": "packageA/about",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "展示类商品列表",
+					"pathName": "packageA/merchandise",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "展示类商品详情",
+					"pathName": "packageA/goods_presentation",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "朋友",
+					"pathName": "pages/friend",
+					"scene": null
+				}
+			]
+		}
+	}
+}
