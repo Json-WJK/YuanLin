@@ -2,6 +2,7 @@ wx.cloud.init()
 const db = () => wx.cloud.database()
 const _ = db().command
 const openid = () => wx.getStorageSync('openid')
+const nickName = () => JSON.parse(wx.getStorageSync('userInfo')).nickName
 
 //获取用户Openid
 const getOpenid = () => {
@@ -141,6 +142,21 @@ const deleteState = (_id) =>{
 	.remove()
 	.then(res => res)
 }
+
+//朋友圈点赞
+const clickPraise = (_id,operate) => {
+	return wx.cloud.callFunction({
+		name: 'clickPraise',
+		data: {
+			_id,
+			operate,
+			users:{
+				openid:openid(),
+				nickName:nickName()
+			}
+		}
+	}).then(res => res) 
+}
 export {
 	getOpenid,
 	saveUserData,
@@ -155,5 +171,6 @@ export {
 	addSquareSddition,
 	getSquareSddition,
 	getUserMoment,
-	deleteState
+	deleteState,
+	clickPraise
 }

@@ -5,7 +5,7 @@
       <div class="each" v-for="(item,index) in contents" :key="index">
         <!-- 每一个  -->
         <div class="Avatar">
-          <img :src="item.avatarUrl" alt>
+          <img :src="item.avatarUrl" alt @click="lookUser(item._openid)">
         </div>
         <div class="box">
           <ul>
@@ -38,9 +38,10 @@
             <li class="text">{{item.content.text}}</li>
             <li class="button">
               <div>浏览{{item.viewcount}}次</div>
-              <div>
-                <span>
-                  <iconx type="dianzan" size="55"></iconx>
+              <div class="icons">
+                <span @click="praise(item.addition_id,item.isLike,index)">
+                  <iconx type="dianzan" :color="item.isLike? 'red':''" size="55"></iconx>
+                  <span>{{item.like}}</span>
                 </span>
                 <span>
                   <iconx type="liaotian" size="55"></iconx>
@@ -67,7 +68,8 @@ import {
   getFriendContent,
   ViewCount,
   getSquareSddition,
-  deleteState
+  deleteState,
+  clickPraise
 } from "@/api/wx";
 import { setTimeout } from "timers";
 export default {
@@ -91,23 +93,23 @@ export default {
         for (let item of res) {
           ViewCount(item._id).then(add => {
             //浏览次数增加
-            console.log(add, "浏览次数");
+            console.log(add, item._id,"浏览次数");
           });
           let pro = new Promise((resolve, reject) => {
             getSquareSddition(item._id).then(get => {
-              //附加属性获取
-              console.log(
-                res,
-                "广场返回数据",
-                item,
-                "遍历数据",
-                get,
-                "附加属性"
-              );
-              item.viewcount = get[0].viewcount;
-              console.log(get[0].viewcount);
+              console.log(get,"附加信息")
+              item.viewcount = get[0].viewcount;   //浏览量
+              item.addition_id = get[0]._id
+              item.like = get[0].like
+              if (get[0].like_users) {
+                for (let el of get[0].like_users) {
+                  if (el.openid == wx.getStorageSync('openid')) {
+                    item.isLike = true
+                  }
+                }
+                item.like_users = get[0].like_users
+              }
               resolve(true);
-              // this.contents = res
             });
           });
           proAll.push(pro);
@@ -120,6 +122,9 @@ export default {
         });
       });
     },
+    lookUser(_openid) {   //查看用户
+      this.$router.push({path:'/packageA/lookUser',query:{_openid}})
+    },
     change(at) {
 			//编辑 删除功能
 			if (this.delete_at == at) {
@@ -127,6 +132,31 @@ export default {
 				return
 			}
       this.delete_at = at;
+    },
+    praise(_id,isLike,index) {  //点赞
+      if (isLike) {  //已经点过赞了
+        wx.showToast({
+          title: '知道你很喜欢，点一次就够了！', //提示的内容,
+          icon: 'none', //图标,
+          duration: 1500, //延迟时间,
+          mask: false, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+        return 
+      } else {
+        clickPraise(_id,1).then( res=> {
+          console.log(res,"点赞结果")
+          this.contents[index].isLike = true
+          this.contents[index].like += 1
+          wx.showToast({
+            title: '点赞成功', //提示的内容,
+            icon: 'none', //图标,
+            duration: 1500, //延迟时间,
+            mask: false, //显示透明蒙层，防止触摸穿透,
+            success: res => {}
+          });
+        })
+      }
     },
     stateDelete(_id,index) {
 			//删除朋友圈某条动态
@@ -178,7 +208,7 @@ export default {
     },
     LookImage(el, index) {
       //查看图片大图
-      console.log(el, "图片信息");
+      // console.log(el, "图片信息");
       wx.previewImage({
         current: el,
         urls: this.contents[index].content.imgsUrl
@@ -287,6 +317,17 @@ export default {
           line-height: 60rpx;
           box-sizing: border-box;
           padding-right: 30rpx;
+          .icons{
+            span{
+              position: relative;
+              margin-right:20rpx;
+              span{
+                position: absolute;
+                left: 50rpx;
+                font-size: 24rpx;
+              }
+            }
+          }
         }
       }
     }

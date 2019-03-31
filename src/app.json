@@ -18,6 +18,12 @@
                 "selectedIconPath": "static/tabber/首页选中.png"
             },
             {
+                "pagePath": "pages/chat",
+                "text": "聊天",
+                "iconPath": "static/tabber/聊天未选中.png",
+                "selectedIconPath": "static/tabber/聊天选中.png"
+            },
+            {
                 "pagePath": "pages/user",
                 "text": "自己",
                 "iconPath": "static/tabber/我的未选中.png",

@@ -47,12 +47,13 @@
             <div class="everya every" v-for="(item,index) in Moment" :key="index">    <!-- 每一条 -->
               <span class="sjz"><iconx type="shijianzhou32" color="#2cbf64" size="45"></iconx></span>
               <div class="text">{{item.content.text}}</div>
-              <div class="image" v-for="(el,i) in item.content.imgsUrl" :key="i">
-                <img 
+              <div class="image">
+                <img  
+                v-for="(el,i) in item.content.imgsUrl" :key="i"
                 :src="el" 
                 :style="{
-                  width:item.content.imgsUrl.length > 1 ? '180rpx' : '280rpx',
-                  height:item.content.imgsUrl.length > 1 ? '180rpx' : '280rpx'
+                  width:item.content.imgsUrl.length > 1 ? '190rpx' : '280rpx',
+                  height:item.content.imgsUrl.length > 1 ? '190rpx' : '280rpx'
                   }" 
                 lazy-load
 								mode="aspectFill"
@@ -72,8 +73,9 @@
             <div class="everyb every" v-for="(item,index) in collect" :key="index">    <!-- 每一条 -->
               <span class="sjz"><iconx type="shijianzhou32" color="#2cbf64" size="45"></iconx></span>
               <div class="text">{{item.content.text}}</div>
-              <div class="image" v-for="(el,i) in item.content.imgsUrl" :key="i">
+              <div class="image">
                 <img 
+                v-for="(el,i) in item.content.imgsUrl" :key="i"
                 :src="el" 
                 :style="{
                   width:item.content.imgsUrl.length > 1 ? '180rpx' : '280rpx',
@@ -122,10 +124,10 @@ export default {
         this.signature = users.data[0].signature;
       });
       getUserMoment().then(refresh => {//用户瞬间
-      console.log(refresh,"用户瞬间")
+      // console.log(refresh,"用户瞬间")
         this.dateF(refresh)  //时间预格式化
         this.Moment = refresh
-        console.log(refresh,"用户瞬间")
+        // console.log(refresh,"用户瞬间")
         let every = wx.createSelectorQuery().selectAll('.everya')
         setTimeout(()=>{
           this.querys(every)   //获取高度
@@ -133,17 +135,17 @@ export default {
       })
     },
     LookImage(el,index){  //查看图片
-			console.log(el,"图片信息")
+			// console.log(el,"图片信息")
 			wx.previewImage({
 				current: el, 
 				urls: this.Moment[index].content.imgsUrl 
 			})
 		},
     dateF(refresh){   //时间预格式化
-    console.log(refresh,"传入数据")
+    // console.log(refresh,"传入数据")
 			for(let item of refresh){
         var time = new Date(item.date);
-        console.log(time)
+        // console.log(time)
 				var y = time.getFullYear();
 				var m = time.getMonth()+1;
 				var d = time.getDate();
@@ -160,13 +162,13 @@ export default {
       every.boundingClientRect(rects => {
         rects.forEach(rect => {
           this.H += rect.height 
-          console.log(this,this.H)
+          // console.log(this,this.H)
         })
       }).exec()
     },
     tabindex(){ //swiper切换事件
       if(!this.swiper_open) return
-      console.log(this.swiper_index)
+      // console.log(this.swiper_index)
       if(this.swiper_index){
         this.swiper_index = 0
         this.swiper_index_tab = 0
@@ -309,11 +311,11 @@ export default {
             flex-wrap: wrap;
             img {
               width:280rpx;
-                height: 280rpx;
-                margin-right: 10rpx;
-                padding: none;
-                border-radius: 10rpx;
-                margin-bottom: 10rpx;
+              height: 280rpx;
+              margin-right: 10rpx;
+              padding: none;
+              border-radius: 10rpx;
+              margin-bottom: 10rpx;
             }
           }
           .date {

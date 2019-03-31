@@ -26,6 +26,24 @@ module.exports = [
         }
     },
     {
+        path: 'pages/chat',
+        config: {
+            navigationBarTitleText: '聊天',
+            navigationBarBackgroundColor: "bluck",
+            navigationBarTextStyle: "black",
+            enablePullDownRefresh: true,
+            backgroundTextStyle: "dark"
+        }
+    },
+    {
+        path: 'packageA/lookUser',
+        config: {
+            navigationBarTitleText: '用户信息',
+            navigationBarBackgroundColor: "bluck",
+            navigationBarTextStyle: "black",
+        }
+    },
+    {
         path: 'packageA/signature',
         config: {
             navigationBarTitleText: '个性签名',

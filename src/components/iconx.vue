@@ -19,7 +19,6 @@
             }
         },
         mounted() {
-            // console.log("图标",this.type)
         },
     }
 
@@ -28,7 +27,7 @@
 <style lang="stylus" type="text/stylus" rel="stylesheet/stylus" scoped>
     @font-face {
         font-family: "wack";
-        src: url('//at.alicdn.com/t/font_1023853_rdelp4ey0y.ttf?t=1553953321219') format('truetype');
+        src: url('//at.alicdn.com/t/font_1023853_7g7rutihyyy.ttf?t=1554042982264') format('truetype');
     }
 
     .wack {
@@ -68,7 +67,9 @@
 .wack-xiala-copy:before {
   content: "\e601";
 }
-
+.wack-xinfeng:before {
+  content: "\e6d3";
+}
 
 
 </style>

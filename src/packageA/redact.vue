@@ -104,10 +104,11 @@ export default {
 				// console.log(content,"插入数据")
 				addFriendContent(content).then(res => {   //发布
 					if (res.errMsg == "collection.add:ok") {
+            console.log(res,"发布成功")
             addSquareSddition(res._id).then( addition => {  //发布附加属性
               console.log(addition)
             })
-            console.log(res._id,"发布成功")
+            // console.log(res._id,"发布成功")
 						wx.showToast({
 							title: '发布成功', //提示的内容,
 							icon: 'success', //图标,
@@ -155,9 +156,7 @@ export default {
           confirmColor: '#3CC51F', 
           success: res => {
             if (res.confirm) {
-              console.log('用户点击确定')
             } else if (res.cancel) {
-              console.log('用户点击取消')
             }
           }
         });
